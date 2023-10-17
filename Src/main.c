@@ -32,9 +32,9 @@ int main(void)
 	NVIC_Enable_IRQ(DMA1_STREAM0);
 	NVIC_Enable_IRQ(ETH);
 
-	NVIC_Set_Priority(ADC,4);
+	NVIC_Set_Priority(ADC,2);
 	NVIC_Set_Priority(DMA1_STREAM0,0);
-	NVIC_Set_Priority(ETH,4);
+	NVIC_Set_Priority(ETH,1);
 
 	NVIC_Set_Pending(ADC);
 	//NVIC_Set_Pending(DMA1_STREAM0);
@@ -50,6 +50,7 @@ int main(void)
 void ADC_IRQHandler(void){
 	var_adc++;
 	NVIC_Set_Pending(DMA1_STREAM0);
+	NVIC_Set_Pending(ETH);
 	var_adc_check_active=NVIC_Get_Active(ADC);
 	read_1=NVIC_Get_Priority(ADC);
 }
@@ -57,6 +58,7 @@ void ADC_IRQHandler(void){
 
 void DMA1_Stream0_IRQHandler(void){
 	var_DMA1_Stream0++;
+	NVIC_Set_Pending(ETH);
 	var_DMA1_Stream0_check_active=NVIC_Get_Active(DMA1_STREAM0);
 	read_2=NVIC_Get_Priority(DMA1_STREAM0);
 }
