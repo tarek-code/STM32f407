@@ -301,8 +301,8 @@ int main(void)
  8000352:	203d      	movs	r0, #61	; 0x3d
  8000354:	f7ff ff48 	bl	80001e8 <NVIC_Enable_IRQ>
 
-	NVIC_Set_Priority(ADC,2);
- 8000358:	2102      	movs	r1, #2
+	NVIC_Set_Priority(ADC,10);
+ 8000358:	210a      	movs	r1, #10
  800035a:	2012      	movs	r0, #18
  800035c:	f7ff ffa8 	bl	80002b0 <NVIC_Set_Priority>
 	NVIC_Set_Priority(DMA1_STREAM0,0);
@@ -340,12 +340,13 @@ void ADC_IRQHandler(void){
  8000382:	b2da      	uxtb	r2, r3
  8000384:	4b0b      	ldr	r3, [pc, #44]	; (80003b4 <ADC_IRQHandler+0x3c>)
  8000386:	701a      	strb	r2, [r3, #0]
-	NVIC_Set_Pending(DMA1_STREAM0);
- 8000388:	200b      	movs	r0, #11
- 800038a:	f7ff ff4f 	bl	800022c <NVIC_Set_Pending>
 	NVIC_Set_Pending(ETH);
- 800038e:	203d      	movs	r0, #61	; 0x3d
+ 8000388:	203d      	movs	r0, #61	; 0x3d
+ 800038a:	f7ff ff4f 	bl	800022c <NVIC_Set_Pending>
+	NVIC_Set_Pending(DMA1_STREAM0);
+ 800038e:	200b      	movs	r0, #11
  8000390:	f7ff ff4c 	bl	800022c <NVIC_Set_Pending>
+
 	var_adc_check_active=NVIC_Get_Active(ADC);
  8000394:	2012      	movs	r0, #18
  8000396:	f7ff ff6d 	bl	8000274 <NVIC_Get_Active>
