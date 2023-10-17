@@ -1,1 +1,4 @@
-../Src/main.c:16:5:main	4	static
+../Src/main.c:25:5:main	8	static
+../Src/main.c:50:6:ADC_IRQHandler	8	static
+../Src/main.c:58:6:DMA1_Stream0_IRQHandler	8	static
+../Src/main.c:65:6:ETH_IRQHandler	8	static
