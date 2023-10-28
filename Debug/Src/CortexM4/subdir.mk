@@ -6,15 +6,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Src/CortexM4/CortexM4_Core_NVIC.c \
-../Src/CortexM4/CortexM4_Core_SCB.c 
+../Src/CortexM4/CortexM4_Core_SCB.c \
+../Src/CortexM4/CortexM4_Core_SysTick.c 
 
 OBJS += \
 ./Src/CortexM4/CortexM4_Core_NVIC.o \
-./Src/CortexM4/CortexM4_Core_SCB.o 
+./Src/CortexM4/CortexM4_Core_SCB.o \
+./Src/CortexM4/CortexM4_Core_SysTick.o 
 
 C_DEPS += \
 ./Src/CortexM4/CortexM4_Core_NVIC.d \
-./Src/CortexM4/CortexM4_Core_SCB.d 
+./Src/CortexM4/CortexM4_Core_SCB.d \
+./Src/CortexM4/CortexM4_Core_SysTick.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -24,7 +27,7 @@ Src/CortexM4/%.o Src/CortexM4/%.su Src/CortexM4/%.cyclo: ../Src/CortexM4/%.c Src
 clean: clean-Src-2f-CortexM4
 
 clean-Src-2f-CortexM4:
-	-$(RM) ./Src/CortexM4/CortexM4_Core_NVIC.cyclo ./Src/CortexM4/CortexM4_Core_NVIC.d ./Src/CortexM4/CortexM4_Core_NVIC.o ./Src/CortexM4/CortexM4_Core_NVIC.su ./Src/CortexM4/CortexM4_Core_SCB.cyclo ./Src/CortexM4/CortexM4_Core_SCB.d ./Src/CortexM4/CortexM4_Core_SCB.o ./Src/CortexM4/CortexM4_Core_SCB.su
+	-$(RM) ./Src/CortexM4/CortexM4_Core_NVIC.cyclo ./Src/CortexM4/CortexM4_Core_NVIC.d ./Src/CortexM4/CortexM4_Core_NVIC.o ./Src/CortexM4/CortexM4_Core_NVIC.su ./Src/CortexM4/CortexM4_Core_SCB.cyclo ./Src/CortexM4/CortexM4_Core_SCB.d ./Src/CortexM4/CortexM4_Core_SCB.o ./Src/CortexM4/CortexM4_Core_SCB.su ./Src/CortexM4/CortexM4_Core_SysTick.cyclo ./Src/CortexM4/CortexM4_Core_SysTick.d ./Src/CortexM4/CortexM4_Core_SysTick.o ./Src/CortexM4/CortexM4_Core_SysTick.su
 
 .PHONY: clean-Src-2f-CortexM4
 

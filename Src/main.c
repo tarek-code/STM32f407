@@ -7,9 +7,7 @@
 
  */
 
-#include <stdint.h>
-#include "CortexM4/CortexM4_Core_NVIC.h"
-#include "CortexM4/CortexM4_Core_SCB.h"
+#include "main.h"
 
 uint8_t var_adc;
 uint8_t var_DMA1_Stream0;
@@ -22,9 +20,20 @@ uint8_t var_ETH_check_active;
  uint8_t read_1;
  uint8_t read_2;
 
+ void rcc_oscillator_cfg(void){
+	 rcc_oscillatio_cfg oscillator_cfg={0};
+	 oscillator_cfg.oscillatio_type=RCC_HSE;
+	 oscillator_cfg.rcc_hse=RCC_ON;
+	 oscillator_cfg.osci_prescaller_cfg.AHP_prescaller=AHP_SYSTEM_CLOCK_DIVIDED_BY_128;
+	 oscillator_cfg.osci_prescaller_cfg.APB1_prescaller=APB1_clock_divided_by_16;
+	 oscillator_cfg.osci_prescaller_cfg.APB2_prescaller=APB2_CLOCK_DIVIDED_BY_2;
+	 rcc_oscillatior_cfg(&oscillator_cfg);
+ }
+
 int main(void)
 {
-
+	rcc_oscillator_cfg();
+/*
 	SCB_Set_Priority_Grouping(SCB_GROUP_2);
 
 
@@ -37,9 +46,14 @@ int main(void)
 	NVIC_Set_Priority(ETH,1);
 
 	NVIC_Set_Pending(ADC);
+	*/
 	//NVIC_Set_Pending(DMA1_STREAM0);
 	//NVIC_Set_Pending(ETH);
+	RCC_Enable(RCC_AHB1ENR,GPIOA);
+	RCC_Enable(RCC_AHB1ENR,GPIOC);
+	RCC_Enable(RCC_AHB1ENR,GPIOI);
 
+	RCC_Disable(RCC_AHB1ENR,GPIOC);
 
     /* Loop forever */
 	while(1){

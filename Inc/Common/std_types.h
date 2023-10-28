@@ -11,7 +11,7 @@
 /*Section includes */
 
 /*Section macros */
-
+#define NULL 0x00
 /*Section macros function  */
 
 /*Section Data type */
