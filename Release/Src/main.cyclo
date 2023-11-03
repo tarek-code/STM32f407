@@ -1,0 +1,5 @@
+../Src/main.c:25:7:int_cfg	1
+../Src/main.c:41:5:main	1
+../Src/main.c:74:6:ADC_IRQHandler	1
+../Src/main.c:84:6:DMA1_Stream0_IRQHandler	1
+../Src/main.c:92:6:ETH_IRQHandler	1

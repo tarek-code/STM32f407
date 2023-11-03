@@ -177,11 +177,15 @@ ret_statuse_t rcc_oscillatior_cfg(rcc_oscillatio_cfg *ptr){
 
 			switch(ptr->oscillatio_type){
 			case RCC_NONE:
-
+				RCC->RCC_CFGR &=0xFFFFFFFC;
+				RCC->RCC_CFGR |=RCC_CLOCK_FROM_NOT_ALLOWED;
 				break;
 			case RCC_HSE:
 				if(ptr->rcc_hse==RCC_ON){
 					RCC_Enable(RCC_CR,16);
+
+					RCC->RCC_CFGR &=0xFFFFFFFC;
+					RCC->RCC_CFGR |=RCC_CLOCK_FROM_HSE;
 				}
 				else{
 					RCC_Disable(RCC_CR,16);
@@ -216,7 +220,7 @@ ret_statuse_t rcc_oscillatior_cfg(rcc_oscillatio_cfg *ptr){
 				break;
 			}
 
-
+			RCC->RCC_CFGR&=RCC_CFGR_CLEAR;
 				l_prescaller|=(uint32_t)((((uint32_t)(ptr->osci_prescaller_cfg.AHP_prescaller))<<4) | (((uint32_t)(ptr->osci_prescaller_cfg.APB1_prescaller))<<10) | (((uint32_t)(ptr->osci_prescaller_cfg.APB2_prescaller))<<13));
 				RCC->RCC_CFGR|=l_prescaller;
 		statuse=FUNCTION_OK;

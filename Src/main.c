@@ -9,30 +9,35 @@
 
 #include "main.h"
 
-uint8_t var_adc;
-uint8_t var_DMA1_Stream0;
-uint8_t var_ETH;
 
-uint8_t var_adc_check_active;
-uint8_t var_DMA1_Stream0_check_active;
-uint8_t var_ETH_check_active;
 
- uint8_t read_1;
- uint8_t read_2;
+ volatile uint32_t number_counteing;
+ volatile uint32_t number2_counteing;
+ volatile uint32_t systick_return_value;
 
- void rcc_oscillator_cfg(void){
+ void int_cfg(void){
 	 rcc_oscillatio_cfg oscillator_cfg={0};
+	 systick_int systickInt={0};
 	 oscillator_cfg.oscillatio_type=RCC_HSE;
 	 oscillator_cfg.rcc_hse=RCC_ON;
-	 oscillator_cfg.osci_prescaller_cfg.AHP_prescaller=AHP_SYSTEM_CLOCK_DIVIDED_BY_128;
-	 oscillator_cfg.osci_prescaller_cfg.APB1_prescaller=APB1_clock_divided_by_16;
-	 oscillator_cfg.osci_prescaller_cfg.APB2_prescaller=APB2_CLOCK_DIVIDED_BY_2;
+	 oscillator_cfg.osci_prescaller_cfg.AHP_prescaller=AHP_SYSTEM_CLOCK_NOT_DIVIDED;
+	 oscillator_cfg.osci_prescaller_cfg.APB1_prescaller=APB1_clock_NOT_DIVIDED;
+	 oscillator_cfg.osci_prescaller_cfg.APB2_prescaller=APB2_CLOCK_NOT_DIVIDED;
 	 rcc_oscillatior_cfg(&oscillator_cfg);
+
+	 systickInt.systick_clock_sourse=SYSTICK_CLOCK_DIV_1;
+	 systickInt.systick_interrupt=SYSTICK_INTERRUPT_DISABLE;
+	 systickInt.systick_relaodReg_value=1000;
+	 SysTick_Int(&systickInt);
  }
+void systick(void){
+	number2_counteing++;
+}
+
 
 int main(void)
 {
-	rcc_oscillator_cfg();
+	int_cfg();
 /*
 	SCB_Set_Priority_Grouping(SCB_GROUP_2);
 
@@ -54,33 +59,36 @@ int main(void)
 	RCC_Enable(RCC_AHB1ENR,GPIOI);
 
 	RCC_Disable(RCC_AHB1ENR,GPIOC);
-
+	SysTick_PeriodicInterval(systick,1000000);
     /* Loop forever */
 	while(1){
 
+
+		number_counteing++;
+		systick_return_value=SysTick_GetRemainingTicks();
 	}
 }
 
 void ADC_IRQHandler(void){
-	var_adc++;
+
 	NVIC_Set_Pending(ETH);
 	NVIC_Set_Pending(DMA1_STREAM0);
 
-	var_adc_check_active=NVIC_Get_Active(ADC);
-	read_1=NVIC_Get_Priority(ADC);
+	NVIC_Get_Active(ADC);
+	NVIC_Get_Priority(ADC);
 }
 
 
 void DMA1_Stream0_IRQHandler(void){
-	var_DMA1_Stream0++;
+
 	NVIC_Set_Pending(ETH);
-	var_DMA1_Stream0_check_active=NVIC_Get_Active(DMA1_STREAM0);
-	read_2=NVIC_Get_Priority(DMA1_STREAM0);
+	NVIC_Get_Active(DMA1_STREAM0);
+	NVIC_Get_Priority(DMA1_STREAM0);
 }
 
 
 void ETH_IRQHandler(void){
-	var_ETH++;
-	var_ETH_check_active=NVIC_Get_Active(ETH);
+
+	NVIC_Get_Active(ETH);
 
 }

@@ -19,6 +19,8 @@
 #define RCC_BASE	(0x40023800UL)
 #define RCC		((stm32f407_rcc_t *)RCC_BASE)
 
+#define RCC_CFGR_CLEAR	(0xFFFF030F)
+
 // ---------------macro end---------------------------
 
 
@@ -40,6 +42,14 @@ GPIOG,
 GPIOH,
 GPIOI
 }rcc_preferal_t;
+
+
+typedef enum{
+	RCC_CLOCK_FROM_HSI =0,
+	RCC_CLOCK_FROM_HSE,
+	RCC_CLOCK_FROM_PLL,
+	RCC_CLOCK_FROM_NOT_ALLOWED
+}rcc_System_clock_switch_t;
 
 typedef enum{
 		RCC_CR ,		//RCC clock control register
@@ -128,11 +138,11 @@ typedef enum{
 }RCC_APB2_prescaller;
 
 typedef enum{
-	APB1_clock_not_divided=0,
-	APB1_clock_divided_by_2=4,
-	APB1_clock_divided_by_4,
-	APB1_clock_divided_by_8,
-	APB1_clock_divided_by_16,
+	APB1_clock_NOT_DIVIDED=0,
+	APB1_clock_DIVIDED_BY_2=4,
+	APB1_clock_DIVIDED_BY_4,
+	APB1_clock_DIVIDED_BY_8,
+	APB1_clock_DIVIDED_BY_16,
 }RCC_APB1_prescaller;
 
 typedef enum{

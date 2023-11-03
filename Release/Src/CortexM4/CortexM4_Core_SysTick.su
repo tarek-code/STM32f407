@@ -1,0 +1,6 @@
+../Src/CortexM4/CortexM4_Core_SysTick.c:12:6:SysTick_Int	0	static
+../Src/CortexM4/CortexM4_Core_SysTick.c:44:6:SysTick_DeInt	0	static
+../Src/CortexM4/CortexM4_Core_SysTick.c:54:6:SysTick_WaitBlocking	0	static
+../Src/CortexM4/CortexM4_Core_SysTick.c:65:6:SysTick_SingleInterval	0	static
+../Src/CortexM4/CortexM4_Core_SysTick.c:69:6:SysTick_PeriodicInterval	0	static
+../Src/CortexM4/CortexM4_Core_SysTick.c:73:6:SysTick_GetRemainingTicks	0	static

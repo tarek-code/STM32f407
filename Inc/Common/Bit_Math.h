@@ -16,4 +16,8 @@
 
 #define READ_BIT(Register,Bit_no)  	((Register>>Bit_no)&0x01)
 
+#define READ_REG(x)		((x))
+#define WRITE_REG(x,VALUE)		((x)=(VALUE))
+#define	MIDIFY_REG(x,CLEARMASK,SETMASK)		WRITE_REG((x),(((READ_REG(x))&(~(CLEARMASK)))|(SETMASK)))
+
 #endif /* BIT_MATH_H_ */
